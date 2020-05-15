@@ -5,6 +5,7 @@ import fs, { promises as fsAsync } from "fs";
 import { promisify, isUndefined } from "util";
 import readline from "readline";
 import filenamifyUrl from "filenamify-url";
+import isValidPath from "is-valid-path";
 import { tmpName, setGracefulCleanup } from "tmp-promise";
 import merge from "easy-pdf-merge";
 
@@ -30,7 +31,9 @@ export async function loadTemplate(options, template) {
     fileUrl = fileUrl.replace("file://", "");
   if (isUndefined(options.displayHeaderFooter))
     options.displayHeaderFooter = true;
-  options[template] = await fsAsync.readFile(fileUrl, "utf-8");
+  options[template] = isValidPath(fileUrl)
+    ? await fsAsync.readFile(fileUrl, "utf-8")
+    : fileUrl;
 }
 
 export function defineStdioInterface(outputPath) {
