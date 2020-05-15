@@ -1,18 +1,35 @@
 {
-  "name": "puppeteer-pdf",
-  "author": "Namespace OÜ <info@namespace.ee>",
-  "version": "1.2.0",
-  "description": "A command line tool to generate PDF from URLs with electron.",
+  "name": "@shivanshs9/puppeteer-pdf",
+  "author": "Shivansh Saini <shivanshs9@gmail.com>",
+  "version": "1.0.0",
+  "description": "A CLI tool to generate PDF from HTML markup provided via STDIO/Files/URLs.",
   "preferGlobal": true,
-  "bin": "./puppeteer-pdf.js",
-  "main": "puppeteer-pdf.js",
+  "bin": {
+    "puppeteer-pdf": "bin/pdf-cli",
+    "@shivanshs9/puppeteer-pdf": "bin/pdf-cli"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "src/puppeteer-pdf.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cli",
+    "pdf",
+    "puppeteer"
+  ],
   "dependencies": {
-    "commander": "^2.17.1",
-    "file-url": "^2.0.2",
+    "commander": "^5.1.0",
+    "easy-pdf-merge": "^0.2.2",
+    "esm": "^3.2.25",
+    "file-url": "^3.0.0",
+    "filenamify-url": "^2.1.1",
     "is-url": "^1.2.4",
-    "lodash": "^4.17.10",
-    "minimist": "^1.2.0",
-    "puppeteer": "^1.7.0"
+    "lodash": "^4.17.15",
+    "puppeteer": "^3.0.4",
+    "tmp-promise": "^3.0.2"
   },
   "license": "MIT"
 }
