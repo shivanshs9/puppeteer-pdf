@@ -4,6 +4,8 @@ import utils from "./utils";
 import puppeteer from "puppeteer";
 
 const VERSION = process.env.npm_package_version || "1.0.0";
+const EXIT_CODE_INVALID_ARG = 1;
+const EXIT_CODE_FILE = 2;
 
 var stdin, urls, rl;
 
@@ -110,7 +112,7 @@ async function parseArgumentsIntoOptions(rawArgs) {
   return options;
 }
 
-export async function cli(args) {
+async function main(args) {
   const { path, verbose, ...options } = await parseArgumentsIntoOptions(args);
 
   const shouldLog = verbose && !utils.isStdio(path);
@@ -154,4 +156,13 @@ export async function cli(args) {
   }
 
   if (!utils.isStdio(path)) console.log(`Printed PDF to ${path}`);
+}
+
+export async function cli(args) {
+  try {
+    await main(args);
+  } catch (err) {
+    console.error(err);
+    process.exit(EXIT_CODE_INVALID_ARG);
+  }
 }
